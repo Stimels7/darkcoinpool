@@ -1,7 +1,65 @@
-#container {
-  margin: 0 auto;
-  possition: relative;
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background: none repeat scroll 0 0 #FFFFFF;
+  padding: 0px;
+}
+
+#header, #container, #main_info {
+  font-family: Arial;
+  font-size: 13px;
+  margin: 5px auto;
+  position: relative;
   width: 970px;
   color: #111;
-  }
+}
+
+#header {
+  background: none repeat scroll 0 0 #666;
+  border: 1px solid #999;
+  color: #787878;
+}
+
+#header h1 {
+  color: #464646;
+  text-shadow: 1px 1px #000, -1px -1px #999;
+}
+
+#main_info {
+  background: none repeat scroll 0 0 #fff;
+  border: 1px solid #E8E8E8;
+  color: #787878;
+}
+
+#main_info div, #main_info p{
+  margin: 5px;
+}
+
+#container {
+  background: none repeat scroll 0 0 #F5F5F5;
+  border: 1px solid #E8E8E8;
+  color: #787878;
+}
+
+#container div {
+  margin: 5px;
+}
+
+/**
+ * Page elements
+ */
+div.status_menu_element {
+  width: 32%;
+  margin: 0;
+  float: left;
+  border: 1px dotted #ccc;
+}
+
+.bold { font-weight: bolder; }
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
   

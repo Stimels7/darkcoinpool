@@ -8,36 +8,37 @@
 </head>
 <body>
 
+    <div id="header">
+      <h1><span></span>Darkcoinpool v.0.1</h1>
+    </div><!-- end "header" -->
+        
+    <div id="main_info">
+      <div class="status_menu_element">
+        <p class="bold left">Current Difficulty:</p>
+        <p><%= current_difficulty %></p>
+        <div class="clear"></div>
+      </div>
+      <div class="status_menu_element">
+        <p class="bold left">Pool shares:</p>
+        <p class="right">
+        <%= total_shares %> Shares total<br />
+        <% ["minute","hour","day"].each do |unit| -%>
+          <%= shares_per(unit).to_s + " shares/ " + unit %><br />
+        <%- end %>
+        </p>
+        <div class="clear"></div>
+      </div>
+      <div class="status_menu_element">
+        <p class="bold left">Pool power:</p>
+        <p class="right">
+        <%= hashes_per_second %> hash/s
+        </p>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+    </div><!-- end "main_info" -->
+    
     <div id="container">
-      <div id="header">
-        
-        <h1>Darkcoinpool v.0.1</h1>
-        
-        <div id="main_info">
-          <table>
-            <tr>
-              <td>Current Difficulty:</td>
-              <td><%= current_difficulty %></td>
-            </tr>
-            <tr>
-              <td>Pool shares:</td>
-              <td><%= total_shares %></td>
-            </tr>
-            <tr>
-              <td>Pool power:</td>
-              <td>
-              <% ["minute","hour","day"].each do |unit| -%>
-                <%= shares_per(unit).to_s + " shares/ " + unit %><br />
-              <%- end %>
-              </td>
-            </tr>
-            <tr>
-              <td><%= hashes_per_second %> hash/s</td>
-            </tr>
-          </table>
-        </div><!-- end "main_info" -->
-
-      </div><!-- end "header" -->
       <%= yield %>
     </div>
 
