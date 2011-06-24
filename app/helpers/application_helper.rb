@@ -37,7 +37,7 @@ module ApplicationHelper
 
   # hier legen wir fest ob wir den difficlt vom web oder local fetchen wollen
   # local ist glaub ich besser da ja eh der bitcoind läuft
-  #alias :current_difficulty :current_difficulty_online
-  alias :current_difficulty :current_difficulty_local
+  alias :current_difficulty :current_difficulty_online
+  #alias :current_difficulty :current_difficulty_local
 
 end
