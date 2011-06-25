@@ -27,6 +27,7 @@ class Statistic
       # find all shares last 15 minutes                                       
       shares_per_timedelta = Share.where("time >= ?", Time.now-timedelta.second).size
       hash_per_second = (shares_per_timedelta * 2**32) / timedelta.to_f 
+      return sprintf("%.2f Mhash/s", hash_per_second / 100000000)
     end
     
     def shares
