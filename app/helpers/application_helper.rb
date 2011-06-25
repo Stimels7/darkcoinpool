@@ -4,10 +4,6 @@ module ApplicationHelper
   
 #### Shares calculations ####
 #
-  def total_shares
-    Share.count
-  end
-
   def shares_per_minute
     time = Time.now
     timedelta = 60 # second

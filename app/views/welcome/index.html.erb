@@ -1,16 +1,22 @@
-<% content_for :javascript do %>
-
-<script>
-   $(window).load(function(){
-   });
-</script>
-<% end %>
-
-
 <% content_for :title do %>Welcome @ darkcoinpool v.0.1<% end %>
 
+<%= content_for :javascript do %>
+  <script>
+    function updateDifficult() {
+      var now = new Date();
+      jQuery('#current_difficulty').load('/welcome/current_difficulty');        
+    }
 
-<div id="main_welcome >
+    $(function() {
+      // Handler for .ready() called.
+      jQuery('#current_difficulty').load('/welcome/current_difficulty');
+      setInterval(updateDifficult, 5000); // 5 * 1000 miliseconds
+
+      });
+  </script>
+<% end %>
+
+<div id="main_welcome">
   <h2>welcome ...</h1>
 </div>
 
