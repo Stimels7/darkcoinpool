@@ -14,6 +14,29 @@ module ApplicationHelper
     return shares
   end
 
+  def new_hashrate_pool
+    # 1 minute timedelta  (60sec)
+    # hashrate = (shares_per_timedelta * (2 ** 32)) / timedelta)
+    # to Mhash/sec:
+    # hashrate  / 1000000
+    # ~71,5
+    time = Time.now                                                         
+    timedelta = 1 # minute
+    # find all shares last 15 minutes                                       
+    shares_per_timedelta = Share.where("time > ?", Time.now-timedelta.minutes).size
+    hash_per_second = (shares_per_timedelta * (2 ** 32)) / 60 * timedelta
+    ghash_per_second = (((hash_per_second / 1000) /1000) /1000)
+  end
+  
+  # Giga Hash per second
+  def old_hashrate_pool
+    return 0.0379
+  end
+
+  # alias for switching between old/new_hashrate_pool
+   alias :hashrate_pool :new_hashrate_pool
+  #alias :hashrate_pool :old_hashrate_pool
+
   # Todo: Think thats not working yeat!
   def hashes_per_second
     time = Time.now
@@ -40,4 +63,27 @@ module ApplicationHelper
   alias :current_difficulty :current_difficulty_online
   #alias :current_difficulty :current_difficulty_local
 
+  # average hours until next block
+  # first parameter = difficulty
+  # second param is the hashrate in Ghashes per second (e.g. 37.7)
+  def average(difficulty=1.0, hashrate=1)
+    difficulty = current_difficulty
+    hashrate = hashrate_pool
+    # Todo: find the current value for foo (seconds?)
+    average_foo = eval("#{difficulty} * 2**32 / #{hashrate} / 60 / 60.0")
+    # convert foo to hours
+    return hours = average_foo / 1000000000
+  end
+    
+  def average_hour(hours=average)
+    return sprintf("%.2f hour", hours)
+  end
+  def average_day(hours=average)
+    hours /= 24
+    return sprintf("%.2f day", hours)
+  end
+  def average_year(hours=average)
+    hours = (hours / 24) / 365
+    return sprintf("%.2f year", hours)
+  end
 end

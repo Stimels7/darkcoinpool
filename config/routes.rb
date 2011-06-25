@@ -1,4 +1,10 @@
 Darkcoinpool::Application.routes.draw do
+  resources :welcome do
+    collection do
+      get 'current_difficulty'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
