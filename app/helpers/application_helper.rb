@@ -21,10 +21,10 @@ module ApplicationHelper
     # hashrate  / 1000000
     # ~71,5
     time = Time.now                                                         
-    timedelta = 1 # minute
+    timedelta = 60 # second
     # find all shares last 15 minutes                                       
-    shares_per_timedelta = Share.where("time > ?", Time.now-timedelta.minutes).size
-    hash_per_second = (shares_per_timedelta * (2 ** 32)) / 60 * timedelta
+    shares_per_timedelta = Share.where("time > ?", Time.now-timedelta.second).size
+    hash_per_second = shares_per_timedelta / timedelta
     ghash_per_second = (((hash_per_second / 1000) /1000) /1000)
   end
   
