@@ -16,6 +16,19 @@ class Statistic
       return []
     end
     
+    def hash_per_second
+      # 1 minute timedelta  (60sec)                                               
+      # hashrate = (shares_per_timedelta * (2 ** 32)) / timedelta                 
+      # to Mhash/sec:                                                             
+      # hashrate  / 1000000                                                       
+      # ~71,5                                                                     
+      time = Time.now                                                             
+      timedelta = 60 # second                                                     
+      # find all shares last 15 minutes                                       
+      shares_per_timedelta = Share.where("time >= ?", Time.now-timedelta.second).size
+      hash_per_second = (shares_per_timedelta * 2**32) / timedelta.to_f 
+    end
+    
     def shares
       Share.count
     end

@@ -1,7 +1,9 @@
 Darkcoinpool::Application.routes.draw do
-  resources :welcome do
+  resources :welcome
+
+  resources :statistic do
     collection do
-      get 'current_difficulty'
+      get 'hash_per_second'
     end
   end
 

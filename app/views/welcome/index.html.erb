@@ -2,15 +2,13 @@
 
 <%= content_for :javascript do %>
   <script>
-    function updateDifficult() {
-      var now = new Date();
-      jQuery('#current_difficulty').load('/welcome/current_difficulty');        
+    function updateHash() {
+      jQuery('#hash_per_second').load('/statistic/hash_per_second');        
     }
 
     $(function() {
       // Handler for .ready() called.
-      jQuery('#current_difficulty').load('/welcome/current_difficulty');
-      setInterval(updateDifficult, 5000); // 5 * 1000 miliseconds
+      setInterval(updateHash, 1000); // 5 * 1000 miliseconds
 
       });
   </script>
