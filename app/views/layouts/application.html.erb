@@ -36,7 +36,7 @@
       <div class="status_menu_element">
         <p class="bold left">Pool power:</p>
         <p class="right">
-          <%= hash_per_second  %> hash/s<br />
+          <%= sprintf("%.2f", hash_per_second / 100000000)  %> hash/s<br />
         </p>
         <div class="clear"></div>
       </div>
