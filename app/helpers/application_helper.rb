@@ -2,50 +2,46 @@ require 'json'
 
 module ApplicationHelper
   
-
+#### Shares calculations ####
+#
   def total_shares
     Share.count
   end
-  
-  def shares_per(unit = "hour")
+
+  def shares_per_minute
     time = Time.now
-    code = "Time.now-1.#{unit}"
-    shares = Share.where("time > ?", eval(code)).size
-    return shares
+    timedelta = 60 # second
+    shares_per_timedelta = Share.where("time >= ?", Time.now-timedelta.second).size
+  end
+ 
+  # helper for something like that
+  # ["minute", "day", "year"].each{|unit| puts shares_per(unit)}
+  # this calls then Shares for 1.minute, 1.day and 1.year 
+  def shares_per(unit="minute")
+    time = Time.now
+    timedelta = eval("1.#{unit}")
+    shares_per_timedelta = Share.where("time >= ?", Time.now-timedelta).size
   end
 
-  def new_hashrate_pool
+  
+
+#### Hashrate calculations ####
+#
+  def hash_per_second
     # 1 minute timedelta  (60sec)
-    # hashrate = (shares_per_timedelta * (2 ** 32)) / timedelta)
+    # hashrate = (shares_per_timedelta * (2 ** 32)) / timedelta
     # to Mhash/sec:
     # hashrate  / 1000000
     # ~71,5
     time = Time.now                                                         
     timedelta = 60 # second
     # find all shares last 15 minutes                                       
-    shares_per_timedelta = Share.where("time > ?", Time.now-timedelta.second).size
-    hash_per_second = shares_per_timedelta / timedelta
-    ghash_per_second = (((hash_per_second / 1000) /1000) /1000)
+    shares_per_timedelta = Share.where("time >= ?", Time.now-timedelta.second).size
+    hash_per_second = (shares_per_timedelta * 2**32) / timedelta.to_f
   end
   
-  # Giga Hash per second
-  def old_hashrate_pool
-    return 0.0379
-  end
-
-  # alias for switching between old/new_hashrate_pool
-   alias :hashrate_pool :new_hashrate_pool
-  #alias :hashrate_pool :old_hashrate_pool
-
-  # Todo: Think thats not working yeat!
-  def hashes_per_second
-    time = Time.now
-    # find all shares last 15 minutes
-    recent_shares = Share.where("time > ?", Time.now-15.minutes).size
-    hashes_per_second = (recent_shares / (60*15) * 2**32) /1024 / 1024
-    return hashes_per_second.to_i
-  end
-
+#### Difficult calculations ####
+#
   # get current difficulty fom local bitcoind instance
   def current_difficulty_local
     getinfo = JSON.parse(`bitcoind getinfo`)
@@ -57,18 +53,20 @@ module ApplicationHelper
     difficulty = `curl http://blockexplorer.com/q/getdifficulty`
     return difficulty.to_f
   end
-
   # hier legen wir fest ob wir den difficlt vom web oder local fetchen wollen
   # local ist glaub ich besser da ja eh der bitcoind läuft
   alias :current_difficulty :current_difficulty_online
   #alias :current_difficulty :current_difficulty_local
 
+
+#### Average calculations #####
+#
   # average hours until next block
   # first parameter = difficulty
   # second param is the hashrate in Ghashes per second (e.g. 37.7)
   def average(difficulty=1.0, hashrate=1)
     difficulty = current_difficulty
-    hashrate = hashrate_pool
+    hashrate = hash_per_second * 1024 * 1024 * 1024
     # Todo: find the current value for foo (seconds?)
     average_foo = eval("#{difficulty} * 2**32 / #{hashrate} / 60 / 60.0")
     # convert foo to hours
