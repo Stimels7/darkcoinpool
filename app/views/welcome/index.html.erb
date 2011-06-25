@@ -1,14 +1,23 @@
 <% content_for :title do %>Welcome @ darkcoinpool v.0.1<% end %>
 
 <%= content_for :javascript do %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script>
-jQuery(document).ready(function() {
-function updateHash() {
-  jQuery('#hash_per_second').load('/statistic/hash_per_second');
-}
-updateHash();
-setInterval(updateHash, 1000); // 5 * 1000 miliseconds
-});
+    jQuery(document).ready(function($) {
+      function updateHash() {
+        $('#hash_per_second').load('/statistic/hash_per_second');
+      }
+    
+      function highlightHash() {
+        $('#hash_per_second').effect("highlight", {}, 3000);
+      }
+      
+      updateHash();
+      highlightHash();
+      setInterval(updateHash, 5000); // 5 * 1000 miliseconds
+      setInterval(highlightHash, 5000); // 5 * 1000 miliseconds
+    });
   </script>
 <% end %>
 
