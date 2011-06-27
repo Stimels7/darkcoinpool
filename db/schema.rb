@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(:version => 20110623113222) do
   end
 
   create_table "test_dates", :force => true do |t|
-    t.text     "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text      "name"
+    t.datetime  "created_at"
+    t.datetime  "updated_at"
+    t.timestamp "time",       :null => false
   end
 
 end
