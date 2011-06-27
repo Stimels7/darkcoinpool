@@ -1,6 +1,9 @@
-== Darkcoinpool
+Darkcoinpool
+============
 
 Pushpool web interface
 
-== Requirements
-- curl ```apt-get install curl```
+Requirements
+------------
+- curl 
+```apt-get install curl```
