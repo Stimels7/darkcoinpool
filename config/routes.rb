@@ -1,4 +1,6 @@
 Darkcoinpool::Application.routes.draw do
+  get "users/new"
+
   resources :welcome
 
   resources :statistic do
