@@ -1,6 +1,17 @@
 require 'json'
 
 module ApplicationHelper
+
+
+  def title
+    base_title = "Darkcoinpool | "
+    if @title.nil? 
+      base_title +  "Untitled"
+    else
+      base_title + h(@title)
+    end
+  end
+
   
 #### Shares calculations ####
 #
