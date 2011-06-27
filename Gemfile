@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,8 +9,7 @@ gem 'rails', '3.0.4'
 # http://stackoverflow.com/questions/6199301/global-access-to-rake-dsl-methods-is-deprecated
 gem "rake", "0.8.7"
 
-
-gem 'mysql2'
+gem "mysql2", "~> 0.2.7"
 
 gem 'jquery-rails', '>= 1.0.3'
 
