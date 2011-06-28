@@ -8,7 +8,7 @@ html {
   padding: 0px;
 }
 
-#header, #container, #main_info {
+header, section, footer, #main_info {
   font-family: Arial;
   font-size: 13px;
   margin: 5px auto;
@@ -17,13 +17,13 @@ html {
   color: #111;
 }
 
-#header {
+header {
   background: none repeat scroll 0 0 #666;
   border: 1px solid #999;
   color: #787878;
 }
 
-#header h1 {
+header h1 {
   color: #464646;
   text-shadow: 1px 1px #000, -1px -1px #999;
 }
@@ -38,16 +38,60 @@ html {
   margin: 5px;
 }
 
-#container {
+section {
   background: none repeat scroll 0 0 #F5F5F5;
   border: 1px solid #E8E8E8;
   color: #787878;
 }
 
-#container div {
+section div {
   margin: 5px;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  margin: 10px auto;
+}
+
+/* Navigation */
+nav {
+  float: none;
+}
+
+nav {
+  background-color: white;
+  padding: 0 0.7em;
+  white-space: nowrap;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.2em 0;
+}
+
+nav ul li a {
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+nav ul li a {
+  color: #999;
+}
+
+nav ul li a:visited {
+  color: #444;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
 /**
  * Page elements
  */

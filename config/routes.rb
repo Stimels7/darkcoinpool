@@ -1,9 +1,12 @@
 Darkcoinpool::Application.routes.draw do
-  get "pages/home"
-  get "pages/contact"
-  get "pages/about"
-  get "users/new"
-  
+  match '/contact', :to => 'pages#contact'
+  match '/help', :to => 'pages#help'
+  match '/about', :to => 'pages#about'
+
+  get '/users/new'
+
+  match '/signup', :to => 'users#new'
+
   resources :welcome
 
   resources :statistic do
@@ -15,7 +18,7 @@ Darkcoinpool::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => "welcome#index"
+  root :to => "pages#home"
 
   # See how all your routes lay out with "rake routes"
 end
