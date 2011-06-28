@@ -1,4 +1,5 @@
 Darkcoinpool::Application.routes.draw do
+  match '/home', :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
   match '/help', :to => 'pages#help'
   match '/about', :to => 'pages#about'
