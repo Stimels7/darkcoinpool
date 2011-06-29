@@ -92,9 +92,15 @@ nav ul li a:visited {
 nav ul li a:hover {
   text-decoration: underline;
 }
+
+
 /**
  * Page elements
  */
+div#debug {
+  text-align: left;  
+}
+
 div.status_menu_element {
   width: 32%;
   margin: 0;

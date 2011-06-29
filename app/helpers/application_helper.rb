@@ -6,10 +6,12 @@ module ApplicationHelper
   def title
     base_title = "Darkcoinpool | "
     if @title.nil? 
-      base_title +  "Untitled"
+      base_title +=  "Untitled"
     else
-      base_title + h(@title)
+      base_title += h(@title)
     end
+    # TODO: refactor views and partials, remove <h1></h1> in them.
+    return content_tag(:h1, base_title)
   end
 
   
