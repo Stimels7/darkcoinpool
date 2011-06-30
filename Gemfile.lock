@@ -39,6 +39,11 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    factory_girl (1.3.3)
+    factory_girl_rails (1.0)
+      factory_girl (~> 1.3)
+      rails (>= 3.0.0.beta4)
+    gravatar_image_tag (1.0.0.pre2)
     highline (1.6.2)
     i18n (0.5.0)
     jquery-rails (1.0.12)
@@ -106,6 +111,8 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  factory_girl_rails (= 1.0)
+  gravatar_image_tag (= 1.0.0.pre2)
   jquery-rails (>= 1.0.3)
   mysql2 (~> 0.2.7)
   rails (= 3.0.7)

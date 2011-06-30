@@ -8,10 +8,9 @@ module ApplicationHelper
     if @title.nil? 
       base_title +=  "Untitled"
     else
-      base_title += h(@title)
+      base_title += @title
     end
-    # TODO: refactor views and partials, remove <h1></h1> in them.
-    return content_tag(:h1, base_title)
+    return base_title
   end
 
   
@@ -62,9 +61,13 @@ module ApplicationHelper
     difficulty = `curl http://blockexplorer.com/q/getdifficulty`
     return difficulty.to_f
   end
+
+  def current_difficulty_fix
+    1379223.4296725
+  end
   # hier legen wir fest ob wir den difficlt vom web oder local fetchen wollen
   # local ist glaub ich besser da ja eh der bitcoind läuft
-  alias :current_difficulty :current_difficulty_online
+  alias :current_difficulty :current_difficulty_fix
   #alias :current_difficulty :current_difficulty_local
 
 
