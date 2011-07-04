@@ -1,11 +1,15 @@
 Darkcoinpool::Application.routes.draw do
-  resources :users
-  
-  match '/signup', :to => 'users#new'
 
-  match '/home', :to => 'pages#home'
+  resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
+
+  match '/signup', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout',:to => 'sessions#destroy'
+
+  match '/home',  :to => 'pages#home'
   match '/contact', :to => 'pages#contact'
-  match '/help', :to => 'pages#help'
+  match '/help',  :to => 'pages#help'
   match '/about', :to => 'pages#about'
 
   resources :welcome

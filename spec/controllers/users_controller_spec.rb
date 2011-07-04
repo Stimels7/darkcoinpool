@@ -95,6 +95,7 @@ describe UsersController do
       end
     end
 
+    
     describe "success" do
       
       before(:each) do
@@ -111,6 +112,11 @@ describe UsersController do
       it "should redirect to the user show page" do
         post :create, :user => @attr
         response.should redirect_to(user_path(assigns(:user)))
+      end
+
+      it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
       end
 
       it "should have a welcome flash message" do
