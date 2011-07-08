@@ -6,3 +6,14 @@ class PoolWorkerTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: pool_worker
+#
+#  id               :integer(4)      not null, primary key
+#  associatedUserId :integer(4)      not null
+#  username         :string(50)
+#  password         :string(255)
+#
+
