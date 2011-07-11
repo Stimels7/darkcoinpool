@@ -1,0 +1,16 @@
+<tr>
+  <td class="bots">
+    <p class="ip_address"><%= bot.ip_address %></p>
+    <p class="timestamp">
+      Added at: <%= time_ago_in_words(bot.created_at) %> ago.<br />
+      Last update: <%= time_ago_in_words(bot.updated_at) %> ago.
+    </p>
+  </td>
+  <% if current_user?(bot.user) %>
+  <td>
+    <%= link_to "delete", bot, :method => :delete,
+                                          :confirm => "You sure?",
+                                          :title => bot.ip_address %>
+  </td>
+  <% end %>
+</tr>

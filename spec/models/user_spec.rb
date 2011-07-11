@@ -35,16 +35,14 @@ describe User do
   it "should accept valid email addresses" do
     addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
+      User.new(@attr.merge(:email => address)).should be_valid
     end
   end
 
   it "should reject invalid email addresses" do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
     addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
+      User.new(@attr.merge(:email => address)).should_not be_valid
     end
   end
 
@@ -142,6 +140,50 @@ describe User do
       @user.should be_admin
     end
   end
+
+  describe "bot associations" do
+
+    before(:each) do
+      @user = User.create(@attr)
+      @bot1 = Factory(:bot, :user => @user, :created_at => 1.day.ago)
+      @bot2 = Factory(:bot, :user => @user, :created_at => 1.hour.ago)
+    end
+
+    it "should have a bots attribute" do
+      @user.should respond_to(:bots)
+    end
+
+    it "should have the right bots in the right order" do
+      @user.bots.should == [@bot2, @bot1]
+    end
+
+    it "should destroy associated bots" do
+      @user.destroy
+      [@bot1, @bot2].each do |bot|
+        lambda do
+          Bot.find(bot.id)
+        end.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+    
+    describe "bot feed" do
+      
+      it "should have a feed" do
+        @user.should respond_to(:feed)
+      end
+
+      it "should include the user's bots" do
+        @user.feed.include?(@bot1).should be_true
+        @user.feed.include?(@bot2).should be_true
+      end
+
+      it "should not include a different user's bots" do
+        bot = Factory(:bot,
+                      :user => Factory(:user, :email => Factory.next(:email)))
+        @user.feed.include?(bot).should be_false
+      end
+    end
+  end
 end
 
 # == Schema Information
@@ -156,4 +198,3 @@ end
 #  encrypted_password :string(255)
 #  salt               :string(255)
 #
-

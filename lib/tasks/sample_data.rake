@@ -2,7 +2,18 @@ require 'faker'
 
 class Fakeout
   
+  # fake ip_V4 address
+  # stolen by Faker
+  def self.ip_v4_address
+    ary = (2..255).to_a
+    [ary.rand,
+    ary.rand,
+    ary.rand,
+    ary.rand].join('.')
+  end
+
   # fake ip_v6 address
+  # stolen by Faker
   def self.ip_v6_address
     @@ip_v6_space ||= (0..65535).to_a
     container = (1..8).map{ |_| @@ip_v6_space.rand }
@@ -23,10 +34,6 @@ end
 
 
 namespace :db do
-  desc "Test ip_v6 address generator"
-  task :ip_v6_address => :environment do
-    puts Fakeout.ip_v6_address
-  end
 
   desc "Fill development database with sample data"
   task :populate => :environment do
@@ -48,6 +55,12 @@ namespace :db do
                   :password_confirmation => password)
     end
 
+    User.all(:limit => 6).each do |user|
+      50.times do
+        user.bots.create!(:ip_address => Fakeout.ip_v4_address)
+      end
+    end
+    
     # Create pool-worker
     99.times do |n|
       associatedUserId = 1

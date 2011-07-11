@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707051617) do
+ActiveRecord::Schema.define(:version => 20110709061247) do
+
+  create_table "bots", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "ip_address"
+    t.text     "desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bots", ["created_at"], :name => "index_bots_on_created_at"
+  add_index "bots", ["user_id"], :name => "index_bots_on_user_id"
 
   create_table "pool_worker", :force => true do |t|
     t.integer "associatedUserId",               :null => false

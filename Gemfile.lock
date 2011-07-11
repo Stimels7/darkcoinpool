@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    ZenTest (4.5.0)
     abstract (1.0.0)
     actionmailer (3.0.7)
       actionpack (= 3.0.7)
@@ -30,6 +31,15 @@ GEM
     activesupport (3.0.7)
     annotate (2.4.0)
     arel (2.0.10)
+    autotest (4.4.6)
+      ZenTest (>= 4.4.1)
+    autotest-inotify (0.0.6)
+      autotest (>= 4.2.4)
+      rb-inotify
+    autotest-notification (2.3.1)
+      autotest (~> 4.3)
+    autotest-rails (4.1.0)
+      ZenTest
     builder (2.1.2)
     capistrano (2.6.0)
       highline
@@ -46,6 +56,7 @@ GEM
       rails (>= 3.0.0.beta4)
     faker (0.9.5)
       i18n (~> 0.4)
+    ffi (1.0.9)
     gravatar_image_tag (1.0.0.pre2)
     highline (1.6.2)
     i18n (0.5.0)
@@ -67,6 +78,7 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.0)
+    notifier (0.1.3)
     polyglot (0.3.1)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -87,6 +99,8 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    rb-inotify (0.8.5)
+      ffi (>= 0.5.0)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -100,6 +114,9 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    spork (0.9.0.rc8)
+    test_notifier (0.3.6)
+      notifier
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -114,7 +131,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
   annotate (= 2.4.0)
+  autotest-inotify
+  autotest-notification
+  autotest-rails
   capistrano
   factory_girl_rails (= 1.0)
   faker
@@ -124,5 +145,7 @@ DEPENDENCIES
   rails (= 3.0.7)
   rake (= 0.8.7)
   rspec-rails (= 2.6.1)
+  spork (~> 0.9.0.rc)
+  test_notifier
   webrat (= 0.7.1)
   will_paginate (= 3.0.pre2)

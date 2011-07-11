@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
 
+  has_many :bots, :dependent => :destroy
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name, :presence => true,
@@ -26,6 +28,10 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
 
+  def feed
+    Bot.where("user_id = ?", id)
+  end
+  
   class << self
     def authenticate(email, submitted_password)
       user = find_by_email(email)

@@ -9,3 +9,9 @@ end
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
+
+Factory.define :bot do |bot|
+  bot.ip_address            "192.168.100.10"
+  bot.association :user
+end
+

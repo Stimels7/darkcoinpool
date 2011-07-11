@@ -84,6 +84,14 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector('h1>img', :class => "gravatar")
     end
+
+    it "should list bots" do
+      bot1 = Factory(:bot, :user => @user, :ip_address => "8.8.8.1")
+      bot2 = Factory(:bot, :user => @user, :ip_address => "8.8.8.2")
+      get :show, :id => @user
+      response.should have_selector("p.ip_address", :content => bot1.ip_address)
+      response.should have_selector("p.ip_address", :content => bot2.ip_address)
+    end
   end
   
   
